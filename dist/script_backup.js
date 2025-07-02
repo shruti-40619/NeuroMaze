@@ -18,7 +18,7 @@ const interval= setInterval(() => {
          flashTraps(trapTiles, tileElements);
          }, 500);
          setTimeout(() => {
-         tileElements[playerIndex].innerHTML = `<span class= text-3xl md:text-6xl>🧍</span>`;
+         tileElements[playerIndex].innerHTML = `<span class= "text-3xl md:text-6xl">🧍</span>`;
          
          document.addEventListener("keydown", handlePlayerMove);
         }, 1600);
@@ -100,7 +100,8 @@ function flashTraps(trapIndexes, tiles) {
 
 // *** player movement ***
 
-let playerIndex=0;
+let playerIndex = 0;
+let nextIndex = playerIndex;
 
 
 function handlePlayerMove(e) {
@@ -110,18 +111,57 @@ function handlePlayerMove(e) {
   const col= playerIndex % gridSize
 
   if(e.key === "ArrowRight" && col < gridSize-1){
-    playerIndex++;
+    nextIndex++;
   }
   else if(e.key === "ArrowLeft" && col>0){
-    playerIndex--;
+    nextIndex--;
   }
   else if(e.key === "ArrowUp" && row>0){
-    playerIndex -= gridSize;
+    nextIndex -= gridSize;
   }
   else if(e.key === "ArrowDown" && row < gridSize-1){
-    playerIndex += gridSize;
+    nextIndex += gridSize;
   }
 
-tileElements[playerIndex].innerHTML= `<span class= text-3xl md:text-6xl>🧍</span>`
+  if(trapTiles.includes(nextIndex)){
+    tileElements[nextIndex].classList.add(
+      "bg-red-700",
+      "text-white",
+      "text-2xl",
+      "text-center",
+      "font-bold"
+
+    );
+    tileElements[nextIndex].innerHTML="💥 Oops!";
+
+    setTimeout(() => {
+      alert("💥 Memory failed! You hit a trap!\nTry again and remember the path better.");
+      location.reload();
+    }, 600);
+
+    return;
+
+  }
+  else if(nextIndex===24){
+    tileElements[nextIndex].classList.add(
+      "bg-green-700",
+      "text-white",
+      "text-2xl",
+      "text-center",
+      "font-bold"
+
+    );
+    tileElements[nextIndex].innerHTML="🧠 Win!!";
+
+    setTimeout(() => {
+      alert(" You have done it!!move on to next level");
+    
+    }, 600);
+
+    return;
+  }
+
+playerIndex=nextIndex;
+tileElements[playerIndex].innerHTML= `<span class= "text-3xl md:text-6xl">🧍</span>`
 
 }
