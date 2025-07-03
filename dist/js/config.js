@@ -1,14 +1,14 @@
 export const LEVELS = [
-  { gridSize: 5, trapCount: 5 },
-  { gridSize: 5, trapCount: 7 },
-  { gridSize: 6, trapCount: 9 },
-  { gridSize: 6, trapCount: 12 },
-  { gridSize: 6, trapCount: 10 },
-  { gridSize: 7, trapCount: 12 },
-  { gridSize: 7, trapCount: 12 },
-  { gridSize: 7, trapCount: 13 },
-  { gridSize: 8, trapCount: 14 },
-  { gridSize: 8, trapCount: 15 },
+  { gridSize: 5, trapCount: 5 , timeLimit: 6},
+  { gridSize: 5, trapCount: 7 , timeLimit: 8},
+  { gridSize: 6, trapCount: 9 , timeLimit: 10},
+  { gridSize: 6, trapCount: 12, timeLimit: 12},
+  { gridSize: 6, trapCount: 10, timeLimit: 14},
+  { gridSize: 7, trapCount: 12, timeLimit: 16},
+  { gridSize: 7, trapCount: 12, timeLimit: 18},
+  { gridSize: 7, trapCount: 13, timeLimit: 20},
+  { gridSize: 8, trapCount: 14, timeLimit: 22},
+  { gridSize: 8, trapCount: 15, timeLimit: 24},
  
 ];
 

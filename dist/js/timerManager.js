@@ -1,35 +1,50 @@
-export let currentTimer = 0;
+let currentTimer = 0;
 let timerInterval = null;
+let onTimeoutCallback = null;
 
 export function startTimer(seconds, onTimeout) {
-  clearInterval(timerInterval); 
+  clearInterval(timerInterval);
 
-  if (seconds === 0) {
+  if (seconds <= 0) {
     console.warn("Invalid timer duration.");
     if (typeof onTimeout === "function") onTimeout();
     return;
   }
 
   currentTimer = seconds;
+  onTimeoutCallback = onTimeout;
 
-  const timeDisplay = document.querySelector("#timer");
-  if (!timeDisplay) {
-    console.error("Timer UI element with ID 'timer' not found in DOM.");
-    return;
-  }
-
-  timeDisplay.textContent = currentTimer;
+  updateTimerUI();
 
   timerInterval = setInterval(() => {
     currentTimer--;
-    timeDisplay.textContent = currentTimer;
+    updateTimerUI();
 
     if (currentTimer <= 0) {
       clearInterval(timerInterval);
-      if (typeof onTimeout === "function") {
-        onTimeout();
+      if (typeof onTimeoutCallback === "function") {
+        onTimeoutCallback();
       }
     }
   }, 1000);
 }
 
+export function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+export function pauseTimer() {
+  clearInterval(timerInterval);
+}
+
+
+export function getRemainingTime() {
+  return currentTimer;
+}
+
+function updateTimerUI() {
+  const timeDisplay = document.querySelector("#timer");
+  if (timeDisplay) {
+    timeDisplay.textContent = currentTimer;
+  }
+}

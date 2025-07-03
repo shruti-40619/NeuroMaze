@@ -1,5 +1,5 @@
-let currentScore =0;
-let hintUsed = false;
+export let currentScore =0;
+export let hintUsed = false;
 
 const levelScoreConfig = [
   { win: 10, hint: -5 },
@@ -22,11 +22,14 @@ export function resetScore(){
 
 export function addScore(points){
     currentScore += points;
+    console.log(" Score added:", points, "| Total:", currentScore);
     updateScoreUi();
 }
 
 export function deductScore(points){
     currentScore -= points;
+    if (currentScore < 0) currentScore = 0;
+    console.log(" Score deducted:", points, "| Total:", currentScore);
     updateScoreUi();
 }
 
@@ -34,9 +37,18 @@ export function getLevelScore(level){
     return levelScoreConfig[level];
 }
 
+export function isHintUsed() {
+  return hintUsed;
+}
+
 export function markHintUsed(){
     hintUsed=true;
 }
+
+export function getCurrentScore() {
+  return currentScore;
+}
+
 
 
 function updateScoreUi(){

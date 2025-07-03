@@ -10,3 +10,8 @@ export function resetState() {
   nextIndex = 0;
   trapTiles = [];
 }
+
+export function setCurrentLevel(level) {
+  console.log("📌 setCurrentLevel called:", level);
+  currentLevel = level;
+}

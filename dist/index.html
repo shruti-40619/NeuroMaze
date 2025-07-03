@@ -19,10 +19,12 @@
             <h1 class="font-extrabold text-3xl text-blue-950 md:text-3xl "> NeuroMaze </h1>
         </div>
         <div class="flex flex-row m-2 p-2 border-b-4 border-blue-950 justify-between">
-             <p id="level-display" class="text-blue-950 md:text-xl text-l font-bold"> Level: 1</p>
+             <p class="text-blue-950 md:text-xl text-l font-bold"> Level:<span id="level-display"></span></p>
+             <p class="text-blue-950 md:text-xl text-l font-bold">
+              Max-Score: <span id="max-score"></span>
+             </p>
 
-             <p class="text-blue-950 md:text-xl text-l font-bold"> Score: </p>
-             <p class="text-blue-950 md:text-xl text-l font-bold">Time: <span id="timer">6</span>s</p>
+             <p class="text-blue-950 md:text-xl text-l font-bold">Time: <span id="timer"></span></p>
 
         </div>
     
@@ -34,9 +36,10 @@
         </div>
     </div>
     <div class="flex flex-col justify-center items-center text-white gap-7">
-      <button id="btn-hint" class="bg-blue-950 font-bold border-2 border-white rounded-2xl p-2">Hint</button>
+      <button id="btn-hint" class="bg-blue-950 font-bold border-2 border-white rounded-2xl p-2 pl-4 pr-4">Hint</button>
       <button id="btn-restart"class="bg-blue-950 font-bold border-2 border-white rounded-2xl p-2">Restart</button>
-      <button id="btn-next" class="bg-blue-950 font-bold border-2 border-white rounded-2xl p-2">Next Level</button>
+      <button id="btn-quit"class="bg-blue-950 font-bold border-2 border-white rounded-2xl p-2 pl-4 pr-4">Quit</button>
+    
     </div> 
     
   </div>
