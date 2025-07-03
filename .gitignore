@@ -3,4 +3,4 @@ dist/style.css
 
 
 # Ignore node dependencies 
-dist/node_modules/
+node_modules/
