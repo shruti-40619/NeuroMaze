@@ -1,0 +1,6 @@
+# Ignore Tailwind's output CSS file
+style.css
+
+
+# Ignore node dependencies 
+node_modules/
