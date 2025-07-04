@@ -2,7 +2,7 @@ export let tileElements = [];
 export let playerIndex = 0;
 export let nextIndex = 0;
 export let trapTiles = [];
-export let currentLevel = 0;
+let currentLevel = 0;
 
 export function resetState() {
   tileElements = [];
@@ -15,3 +15,5 @@ export function setCurrentLevel(level) {
   console.log("📌 setCurrentLevel called:", level);
   currentLevel = level;
 }
+
+export { currentLevel };

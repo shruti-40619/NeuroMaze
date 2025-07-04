@@ -8,13 +8,18 @@ import { stopTimer } from "./timerManager.js";
 
 
 
-
+let moveHandler = null;
+let player = 0;
 export function setupPlayerControls(gridSize, endTileIndex) {
-  let player = 0;
+   if (moveHandler) {
+    document.removeEventListener("keydown", moveHandler);
+  }
 
+  player = 0;
+  
   tileElements[player].innerHTML = `<span class="${TILE_CLASSES.player}">🧍</span>`;
 
-  document.addEventListener("keydown", function handleMove(e) {
+   moveHandler = function handleMove(e) {
     tileElements[player].innerHTML = "";
     let row = Math.floor(player / gridSize);
     let col = player % gridSize;
@@ -66,7 +71,8 @@ export function setupPlayerControls(gridSize, endTileIndex) {
 
     player = next;
     tileElements[player].innerHTML = `<span class="${TILE_CLASSES.player}">🧍</span>`;
-  });
+  }
+  document.addEventListener("keydown", moveHandler);
 
 }
 

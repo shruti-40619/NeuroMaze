@@ -61,7 +61,7 @@ export function showWinMessage({ hintUsed, score }) {
   if (hintUsed) {
     buttons.unshift({
       text: "🔁 Play Again",
-      onClick: () => startLevel(level),
+      onClick: () => startLevel(currentLevel),
     });
   }
 
@@ -75,7 +75,7 @@ export function showTimeoutMessage() {
     buttons: [
       {
         text: "🔁 Play Again",
-        onClick: () => location.reload(),
+        onClick: () => startLevel(currentLevel),
       },
     ],
   });
@@ -88,7 +88,7 @@ export function showMemoryFailedMessage() {
     buttons: [
       {
         text: "🔁 Play Again",
-        onClick: () => location.reload(),
+        onClick: () => startLevel(currentLevel),
       },
     ],
   });
