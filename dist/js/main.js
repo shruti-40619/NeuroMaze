@@ -1,7 +1,7 @@
 import { LEVELS } from "./config.js";
 import { resetState, trapTiles, tileElements, setCurrentLevel,currentLevel} from "./gameState.js";
 import { createGrid } from "./gridManager.js";
-import { generateTrapIndexes, flashTraps } from "./trapEngine.js";
+import { generateTrapIndexes, flashTraps, generateDecoyAndRealTraps } from "./trapEngine.js";
 import { setupPlayerControls } from "./playerEngine.js";
 import { startTimer,stopTimer,pauseTimer,getRemainingTime } from "./timerManager.js";
 import { markHintUsed, deductScore, getLevelScore} from "./scoreManager.js";
@@ -58,10 +58,20 @@ export function startLevel(level) {
   if (maxScoreDisplay) {
      maxScoreDisplay.textContent = win;
   }
-
+  let traps = [];
+  let decoyTraps=[];
   createGrid(level, container, () => {
-    const traps = generateTrapIndexes(trapCount, gridSize);
-    trapTiles.push(...traps);
+    if (level === 3) {
+            const { realTraps, decoyTraps:dt } = generateDecoyAndRealTraps(gridSize);
+            trapTiles.push(...realTraps);
+            traps = [...realTraps, ...decoyTraps];
+            decoyTraps = dt; 
+      } else {
+             traps = generateTrapIndexes(trapCount, gridSize);
+             trapTiles.push(...traps);
+      }
+
+  
 
     console.log(" Trap indexes:", trapTiles);
 
@@ -69,7 +79,7 @@ export function startLevel(level) {
     flashTraps(traps, tileElements);
 
     setTimeout(() => {
-      setupPlayerControls(gridSize, gridSize * gridSize - 1);
+      setupPlayerControls(gridSize, gridSize * gridSize - 1, decoyTraps);
 
       setupHintButton();
       const levelTime = LEVELS[level].timeLimit;

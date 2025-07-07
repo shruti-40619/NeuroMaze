@@ -10,7 +10,7 @@ import { stopTimer } from "./timerManager.js";
 
 let moveHandler = null;
 let player = 0;
-export function setupPlayerControls(gridSize, endTileIndex) {
+export function setupPlayerControls(gridSize, endTileIndex, decoyTraps = []) {
    if (moveHandler) {
     document.removeEventListener("keydown", moveHandler);
   }
@@ -39,7 +39,11 @@ export function setupPlayerControls(gridSize, endTileIndex) {
        showMemoryFailedMessage();
       }, 600);
       return;
-    }
+    }else if (decoyTraps.includes(next)) {
+        tileElements[player].innerHTML = `<span class="${TILE_CLASSES.player}">🧍</span>`;
+        return;
+     }
+
 
     if (next === endTileIndex) {
       tileElements[next].innerHTML = "🧠 Win!!";

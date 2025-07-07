@@ -79,6 +79,44 @@ export function generateTrapIndexes(count, gridSize) {
   return generateSafeTrapIndexes(gridSize, count, chosenPath);
 }
 
+
+
+// level 4 twist
+
+ export function generateDecoyAndRealTraps(gridSize, realCount = 8, decoyCount = 4) {
+  const totalTiles = gridSize * gridSize;
+  const path = aStarPath(gridSize, 0, totalTiles - 1);
+  const safeSet = new Set(path);
+
+  const realTraps = new Set();
+  const decoyTraps = new Set();
+
+  while (realTraps.size < realCount) {
+    const rand = Math.floor(Math.random() * totalTiles);
+    if (!safeSet.has(rand) && rand !== 0 && rand !== totalTiles - 1) {
+      realTraps.add(rand);
+    }
+  }
+
+  while (decoyTraps.size < decoyCount) {
+    const rand = Math.floor(Math.random() * totalTiles);
+    if (
+      !safeSet.has(rand) &&
+      !realTraps.has(rand) &&
+      rand !== 0 &&
+      rand !== totalTiles - 1
+    ) {
+      decoyTraps.add(rand);
+    }
+  }
+
+  return {
+    path,
+    realTraps: Array.from(realTraps),
+    decoyTraps: Array.from(decoyTraps)
+  };
+}
+
 export function flashTraps(trapIndexes, tiles) {
   trapIndexes.forEach(i => tiles[i].classList.add(...TILE_CLASSES.trapFlash));
   setTimeout(() => {
